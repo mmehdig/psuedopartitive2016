@@ -1,0 +1,238 @@
+Implementation of presuppositions based on stratified reference for measurement, Champollion 2015
+
+#### Copied definitions and rules ####
+
+multiple letter identifiers
+
+use rule function application
+use rule non-branching nodes
+use rule predicate modification
+use rule lambda abstraction
+
+variables of type e : x 
+variables of type i : t
+variables of type v : e
+
+variables of type <i,n>: U
+variables of type <e,i> : f
+variables of type <v,i> : T
+variables of type <e,t> : P
+variables of type <v,t> : Q
+variables of type <i,t> : K M
+
+# the dimensions, directions, or aspects of an object
+constants of type <e,i> : weight length temperature volume height
+
+constants of type <v,i> : spatial temporal speed temperature-of-event temperature-rise temperature-drop
+
+# measureable unit, interval or package of something:
+constants of type <i,n>: lb gr hour minute mile feet celcius liter mph inch meter
+
+constants of type e : berlin
+constants of type <e,t> : rice book water railroad-tracks snow n-pound-weight
+constants of type <v,t> : run drive talk global-warming wait widen boil cool
+
+# type of «for» in Champollion 2015
+# <<v,i>,<<i,t>,<<v,t>,t>>>
+
+# the type of SR
+constants of type <<e,i>,<<i,t>,<<e,t>,t>>> : SR
+constants of type <<v,i>,<<i,t>,<<v,t>,t>>> : SRv
+
+constants of type <t,<t,t>>: partial
+
+# epsilon: grandularity function
+constants of type <<i,t>,<i,t>> : eps
+
+# the trick:
+define for0 : Lf.LK.LP.Lx.partial(SR(f)(eps(K))(P))(P(x) & K(f(x)))
+define for,for1 : LT.LM.LQ.Le.partial(SRv(T)(eps(M))(Q))(Q(e) & M(T(e)))
+define at : LT.LM.LQ.Le.[Q(e) & M(T(e))]
+
+# measurable aspects and dimensions of objects (entities)
+define weight-of : weight
+define length-of : length
+define height-of : height
+define volume-of : volume
+define temperature-of : temperature
+#define weight-of : Lx.weight(x)
+#define length-of : Lx.length(x)
+#define height-of : Lx.height(x)
+#define volume-of : Lx.volume(x)
+#define temperature-of : Lx.temperature(x)
+
+# measurable aspects and dimensions of events
+define speed-of : speed
+define temporal-trace : temporal
+define spatial-extend : spatial
+define temperature-of-event : temperature-of-event
+define temperature-rise : temperature-rise
+define temperature-drop : temperature-drop
+#define speed-of : Le.speed(e)
+#define temporal-trace : Le.temporal(e)
+#define spatial-extend : Le.spatial(e)
+#define temperature-of-event : Le.temperature-of-event(e)
+#define temperature-rise : Le.temperature-rise(e)
+#define temperature-drop : Le.temperature-drop(e)
+
+# entities
+define rice : Lx.rice(x)
+define water : Lx.water(x)
+define railroad-tracks : Lx.railroad-tracks(x)
+define book : Lx.book(x)
+define books : Lx.*book(x)
+define apple : Lx.apple(x)
+define apples : Lx.*apple(x)
+define snow : Lx.snow(x)
+define n-pound-weights: Lx.*n-pound-weight(x)
+
+# events
+define run,running : Le.run(e)
+define drive,driving,drove : Le.drive(e)
+define talk,talks,talking : Le.talk(e)
+define global-warming: Le.global-warming(e)
+define boil,boiled : Le.boil(e)
+define cool : Le.cool(e)
+define wait,waited : Le.wait(e)
+define widen,widens : Le.widen(e)
+define fall,fell : Le.fall(e)
+
+define minute,minutes : Lt.minute(t)
+define hour,hours : Lt.hour(t)
+define liter,liters : Lt.liter(t)
+define inch,inches : Lt.inch(t)
+define pound,pounds : Lt.lb(t)
+define gram,grams : Lt.gr(t)
+define feet,feets : Lt.feet(t)
+define mile,miles : Lt.mile(t)
+define meter,meters : Lt.meter(t)
+define miles-an-hour,miles-per-hour : Lt.mph(t)
+define degree-celcius: Lt.celcius(t)
+
+# numbers: true iff value of a unit (scale) type:<i,n> for something measurable i-type matches the number.
+# <<i,n>,<i,t>>
+define one : LU.Lt.[U(t)=1]
+define two : LU.Lt.[U(t)=2]
+define five : LU.Lt.[U(t)=5]
+define thirty : LU.Lt.[U(t)=30]
+define hundred : LU.Lt.[U(t)=100]
+define five-hundred : LU.Lt.[U(t)=500]
+
+# "several degrees" as a count noun?
+define several : LU.Lt.[U(t)>2]
+
+# of entity
+define of : LP.P 
+# of event
+define of1 : LQ.Q
+
+
+exercise tree
+title 28 (Measurement)
+directions "Pseudopartitives can be used to talk about substances and events in terms of their measurement along various dimensions (Krifka, 1998; Schwarzschild, 2006)"
+
+instructions 28a. five pounds of rice (weight)
+[.NP [.NP [. [. for0 weight-of]] [.NP five pounds]] [.PP [.P of] rice]]
+
+instructions 28b. five liters of water (volume)
+[.NP [.NP [. [. for0 volume-of]] [.NP five liters]] [.PP [.P of] water]]
+
+instructions 28c. five hours of talks (temporal)
+[.NP [.NP [. [. for1 temporal-trace]] [.NP five hours]] [.PP [.P of1] talks]]
+
+instructions 28d. five miles of railroad tracks 
+[.NP [.NP [. [. for0 length-of]] [.NP five miles]] [.PP [.P of] railroad-tracks]]
+
+
+exercise tree
+title 29 for-adverbials (fail to apply to the parts)
+
+directions The count nouns in the case of pseudopartitives are similar to the category of telic predicates in the case of for-adverbials. Both reject predicates that fail to apply to the parts of the entities and events in their denotations. It is not possible to use a pseudopartitive like (29c) to describe a single book whose weight is five pounds.
+
+instructions 29a. five pounds of rice
+[.NP [.NP [. [. for0 weight-of]] [.NP five pounds]] [.PP [.P of] rice]]
+
+instructions 29b. five pounds of books
+[.NP [.NP [. [. for0 weight-of]] [.NP five pounds]] [.PP [.P of] books]]
+
+instructions 29c. *five pounds of book
+[.NP [.NP [. [. for0 weight-of]] [.NP five pounds]] [.PP [.P of] book]]
+
+
+exercise tree
+title 30,32 for-adverbials (constant across parts)
+directions The measure functions whose value tends to stay constant across the parts of any object or event they measure. It's the second similarity with for-adverbials.
+
+instructions 3a. run (to the store) for five miles an hour
+[.VP [.V run] [.AdvP [. [. for speed-of]] [.NP five miles-an-hour]]]
+
+instructions 30b. five hours of running
+[.NP [.NP [. [. for1 temporal-trace]] [.NP five hours]] [.PP [.P of1] running]]
+
+instructions 30b. *five miles an hours of running
+[.NP [.NP [. [. for1 speed-of]] [.NP five miles-an-hour]] [.PP [.P of1] running]]
+
+instructions 30c. five inches of water
+[.NP [.NP [. [. for0 height-of]] [.NP five inches]] [.PP [.P of] water]]
+
+instructions 30c & 31a. *five degree (Celcius) of water
+[.NP [.NP [. [. for0 temperature-of]] [.NP five degree-celcius]] [.PP [.P of] water]]
+
+instructions 30c. two degree Celcius of global warming
+[.NP [.NP [. [. for1 temperature-rise]] [.NP two degree-celcius]] [.PP [.P of1] global-warming]]
+
+
+exercise tree
+title Monotonicity vs Stratified Reference
+
+instructions 33. five feet of snow
+[.NP [.NP [. [. for0 height-of]] [.NP five feet]] [.PP [.P of] snow]]
+
+instructions 34a. waited for five hours
+[.VP [.V wait] [.AdvP [. [. for temporal-trace]] [.NP five hour]]]
+
+instructions 34b. waited for five hours
+[.VP [.V widens] [.AdvP [. [. for spatial-extend]] [.NP five meters]]]
+
+instructions 34c. *drove for thirty miles an hour
+[.VP [.V drove] [.AdvP [. [. for speed-of]] [.NP thirty miles-an-hour]]]
+
+instructions 34d. *boiled for 100 degree Celsius
+[.VP [.V boiled] [.AdvP [. [. for temperature-of-event]] [.NP hundred degree-celcius]]]
+
+instructions 35a. drove (at) thirty miles an hour
+[.VP [.V drove] [.AdvP [. [. at speed-of]] [.NP thirty miles-an-hour]]]
+
+instructions 35b. boiled at 100 degree Celsius
+[.VP [.V boiled] [.AdvP [. [. at temperature-of-event]] [.NP hundred degree-celcius]]]
+
+instructions 36. cool for several degrees
+[.VP [.V cool] [.AdvP [. [. for temperature-drop]] [.NP several degree-celcius]]]
+
+
+exercise tree
+title Mass and Count
+directions The agerage apple weight 150 grams.
+
+instructions 46a. five hundred grams of apple
+[.NP [.NP [. [. for0 weight-of]] [.NP five-hundred grams]] [.PP [.P of] apple]]
+
+instructions 46a. five hundred grams of apples
+[.NP [.NP [. [. for0 weight-of]] [.NP five-hundred grams]] [.PP [.P of] apples]]
+
+instructions 46b. hundred grams of apple
+[.NP [.NP [. [. for0 weight-of]] [.NP hundred gram]] [.PP [.P of] apple]]
+
+instructions 46b. hundred grams of apples
+[.NP [.NP [. [. for0 weight-of]] [.NP hundred gram]] [.PP [.P of] apples]]
+
+instructions 46c. one gram of apple
+[.NP [.NP [. [. for0 weight-of]] [.NP one gram]] [.PP [.P of] apple]]
+
+instructions 46c. ?? one gram of apples
+[.NP [.NP [. [. for0 weight-of]] [.NP one gram]] [.PP [.P of] apples]]
+
+instructions 48 & 49. twelve pounds of n-pound weights
+[.NP [.NP [. [. for0 weight-of]] [.NP twelve pounds]] [.PP [.P of] n-pound-weights]]
+
+
