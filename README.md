@@ -1,7 +1,7 @@
 # psuedopartitive2016
 This is an implementation of examples in Measurement section of Stratified Reference paper by Lucas Champollion (2015) for Lambda Calculator.
 
-=== Reference ===
+### Reference 
 
 Champollion, L. (2015). Stratified reference: the common core of distributivity, aspect, and measurement. Theoretical Linguistics, 41(3-4), 109-149.
 
