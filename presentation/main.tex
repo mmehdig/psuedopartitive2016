@@ -1,0 +1,347 @@
+\documentclass{beamer}
+\usepackage{ stmaryrd }
+\usetheme{Goettingen}
+
+\title{Stratified reference: measurement}
+\subtitle{Implementation of Champollion (2015)}
+
+\author{Mehdi Ghanimifard}
+\institute % (optional, but mostly needed)
+{University of Gothenburg}
+
+\date{Semantics and Pragmatics, 2016}
+
+\subject{Linguistics}
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Measurement Puzzle}
+
+\subsection{The puzzle}
+
+\begin{frame}{The puzzle}
+Why does pseudopartitives reject certain measure functions? 
+  \begin{itemize}
+  \item {
+    five liters of water (volume)
+  }
+  \item {
+    *five degrees Celsius of water (*temperature)
+  }
+  \end{itemize}
+\end{frame}
+
+\subsection{Previous work}
+
+\begin{frame}{Previous work}{Monotonicity}
+
+Schwarzschild (2006): Only \alert{monotonic} measure functions are admissible.
+
+  \begin{itemize}
+  \item {
+    A measure function $\mu$ is monotonic iff for any two entities $a$ and $b$, if $a$ is a proper part of $b$, then $\mu(a) < \mu(b)$.
+    \pause 
+  }
+  \item {   
+    For example, volume is monotonic, but temperature is not monotonic.
+  }
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Previous work: Problem?}{Monotonicity}
+
+  \begin{itemize}
+  \item {   
+    Five feet of snow fell on Berlin
+  }
+  \item {   
+    The height for snow is not monotonic, otherwise the snow in West Berlin should have lower height compering to whole snow in Berlin.
+  }
+  \item {   
+    Schwarzschild response: $a$ should be a proper ``Pragmatic Part" of $b$.
+  }
+  \end{itemize}
+  
+\end{frame}
+
+
+\subsection{Novel observation}
+
+\begin{frame}{Novel observation}{for-adverbials}
+
+  \begin{itemize}
+  \item {
+    The same measurement functions rejected by psudopartitives are rejected by for-adverbials.
+  }
+  \item {
+    five hours of driving (duration)
+  }
+  \item {
+    *five miles per hour of driving (*speed)
+  }
+  \end{itemize}
+  Strategy: Solve the aspect puzzle and the measurement puzzle in distributivity by introducing the \alert{stratified reference}.
+\end{frame}
+
+\section{Solution}
+
+\subsection{For-adverbials}
+
+\begin{frame}{For-adverbials}{Stratified reference presupposition}
+  \begin{itemize}
+  \item {
+    For-adverbials presuppose \alert{stratified reference}.
+  }
+  \item {
+    eat apples for three hours
+    \[
+    \forall e [
+        \llbracket eat\ apple \rrbracket(e) \rightarrow
+        e \in\ *\lambda e' \left\Big(
+            \begin{tabular}{l}
+            \llbracket eat\ apple \rrbracket(e') \land \\
+            \varepsilon(\lambda t[hour(t)=3])(runtime(e'))
+            \end{tabular}
+        \right\Big)
+    ]
+    \]
+  }
+  \item {
+    *eat ten apples for three hours
+    \[
+    \forall e [
+        \llbracket eat\ ten\ apples \rrbracket(e) \rightarrow
+        e \in\ *\lambda e'    \left\Big(
+            \begin{tabular}{l}
+                \llbracket eat\ ten\ apples \rrbracket(e') \land \\
+                \varepsilon(\lambda t[hour(t)=3])(runtime(e'))
+            \end{tabular}
+        \right\Big)
+    ]
+    \]
+    (Every eating-ten-apples event consists of subevents of eating-ten-apples with runtime of shorter than 3 hours)
+  }
+  \end{itemize}
+\end{frame}
+
+\subsection{Stratified reference}
+
+\begin{frame}{Stratified reference}{Definition}
+  \begin{itemize}
+  \item {
+    Definition:
+    \[
+    SR_{f,\varepsilon(K)}(P) = \forall x[P(x) \rightarrow x \in\ ^*\lambda y(P(y) \land \varepsilon(K)(f(y)))]
+    \]
+    (Any $x$ with property $P$ consists of parts who have property $P$ and these parts are granular in $f$ dimension with the scale of $K$) 
+  }
+  \item{
+    $\varepsilon(K)(f(y))$ roughly means that the $f$-dimension of $y$ is small in scale of $K$.
+  }
+  \item{
+    Intuitively, $x \in\ *\lambda y. P(y)$ means that $x$ consists of one or more parts such that $P$ holds for every part.
+  }
+  \end{itemize}
+\end{frame}
+
+\subsection{Pseudopartitives}
+
+\begin{frame}{Pseudopartitives}{Parallels between for-adverbials and pseudopartitives}
+  \begin{itemize}
+  \item[1.] {
+    Both reject if it fails to apply to parts of entity or event.
+    \[
+    SR_{f,\varepsilon(K)}(P) = \forall x[P(x) \rightarrow x \in\ ^*\lambda y(\color{red}P(y) \color{black} \land \varepsilon(K)(f(y)))]
+    \]
+    *five pounds of book. (with ``book" as a count noun)
+    \pause
+  }
+  \item[2.] {
+    Both reject if the value of measure function stays constant acorss the parts of entity or event.
+    \[
+    SR_{f,\varepsilon(K)}(P) = \forall x[P(x) \rightarrow x \in\ ^*\lambda y(P(y) \land \color{red}\varepsilon(K)(f(y))\color{black})]
+    \]
+    *five degrees Celsius of the water in the bottle.
+  }
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Pseudopartitives}{Snow example}
+  \begin{itemize}
+  \item {
+    five feet snow
+    \[
+    SR_{height,\varepsilon(\lambda l.[feet(l)=5])}(\lambda y.snow(y)) = \\
+    \forall x [
+        snow(x) \rightarrow
+        x \in\ *\lambda y \left\Big(
+            \begin{tabular}{l}
+                snow(y) \land \\
+                \varepsilon(\lambda t[feet(t)=5])(height(y))
+            \end{tabular}
+        \right\Big)
+    ]
+    \]
+  }
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Pseudopartitives}{Mass vs count nouns}
+  \begin{itemize}
+  \item {
+    100 grams of apple
+    \[
+    SR_{weight,\varepsilon(\lambda l.[gram(l)=100])}(\lambda y.apple(y)) = \\
+    \forall x [
+        apple(x) \rightarrow
+        x \in\ *\lambda y \left\Big(
+            \begin{tabular}{l}
+                apple(y) \land \\
+                \varepsilon(\lambda t[gram(t)=100])(weight(y))
+            \end{tabular}
+        \right\Big)
+    ]
+    \]
+  }
+  \item {
+    *100 grams of apples
+    \[
+    SR_{weight,\varepsilon(\lambda l.[gram(l)=100])}(\lambda y.*apple(y)) = \\
+    \forall x [
+        *apple(x) \rightarrow
+        x \in\ *\lambda y \left\Big(
+            \begin{tabular}{l}
+                *apple(y) \land \\
+                \varepsilon(\lambda t[gram(t)=100])(weight(y))
+            \end{tabular}
+        \right\Big)
+    ]
+    \]
+  }  \end{itemize}
+\end{frame}
+
+\section{Implementation}
+\subsection{Presupposition}
+
+\begin{frame}{Presupposition}{Partial function}
+
+Partial function are used to represent presuppositions. The representation of partial function in Champollion (2015):
+
+\[
+\lambda x:\phi.\psi
+\]
+
+If $\phi$ holds it returns $\psi$ otherwise undefined.
+
+\begin{itemize}
+    \item{My solution:
+    \[
+    \lambda x.\partial(\phi)(\psi)
+    \]
+
+    In Lambda Calculator:
+    
+    \[
+    \lambda x.partial(phi)(psi)
+    \]
+    }
+\end{itemize}
+\end{frame}
+
+\subsection{For-adverbials}
+
+\begin{frame}{For-adverbials}{For-adverbials for entities and events}
+
+Based on Champollion (2015) $for$ is represented as follows:
+    \[
+    \llbracket for \rrbracket = \lambda \tau_{\langle v,i \rangle} \lambda M_{\langle i,t \rangle} \lambda P_{\langle v,t \rangle} \lambda e.\partial(SR_{\tau,\varepsilon(M)}(P))(P(e)\land M(\tau(e)))
+    \]
+    
+    For example: ``he walked [for five miles]_{AdvP}":
+    
+    \[
+    \llbracket for\ five\ miles \rrbracket 
+    = \lambda P_{\langle v,t \rangle} \lambda e.\partial(SR_{\sigma,\varepsilon(\lambda l.[mile(l)=5])}(P))(P(e)\land [mile(\sigma(e))=5])
+    \] 
+    ($\sigma$ is the parameter for spatial extend, instead of runtime.)
+
+    \[
+    \llbracket walk\ for\ five\ miles \rrbracket 
+    = \\
+    \lambda e.\partial(SR_{\sigma,\varepsilon(\lambda l.[mile(l)=5])}(\lambda e'.walk(e'))(walk(e)\land [mile(\sigma(e))=5])
+    \] 
+
+\end{frame}
+
+\begin{frame}{For-adverbials}{For-adverbials for entities and events}
+
+On entities, for example ``five miles of railroad tracks":
+
+    \[
+    \llbracket (for) \rrbracket = \lambda f_{\langle e,i \rangle} \lambda K_{\langle i,t \rangle} \lambda P_{\langle x,t \rangle} \lambda x.\partial(SR_{f,\varepsilon(K)}(P))(P(x)\land K(f(x)))
+    \]
+    
+    \[
+    \Rightarrow \llbracket (for)\ five\ miles \rrbracket 
+    = \\
+    \lambda P_{\langle e,t \rangle} \lambda x.\partial(SR_{\sigma,\varepsilon(\lambda l.[mile(l)=5])}(P))(P(x)\land [mile(\sigma(x))=5])
+    \] 
+    
+
+    \[
+    \Rightarrow \llbracket [(for)\ five\ miles]\ of\ railroad\ tracks \rrbracket 
+    = \\
+    \lambda x.\partial(SR_{\sigma,\varepsilon(\lambda l.[mile(l)=5])}(\lambda y.railroad(y)))(railroad(x)\land [mile(\sigma(x))=5])
+    \] 
+
+\end{frame}
+
+
+\subsection{Lambda Calculator}
+
+\begin{frame}{Lambda Calculator}{Implementation}
+
+\begin{itemize}
+    \item{In our application, the partial function is only for truth-values:
+    
+    $constants\ of\ type\ <t,<t,t>> : partial$
+    }
+    \item{Granularity function:
+    
+    $constants\ of\ type\ <it,it> : eps$
+    }
+    \item{Stratified reference parametrized constant function can be used in presupposition:
+
+    $constants\ of\ type\ <ei,<it,<et,t>>> : SR$ \\
+    
+    $\Rightarrow SR(f_{ei})(\varepsilon(K_{it}))(P_{et})$ \\
+    
+    $constants\ of\ type\ <vi,<it,<vt,t>>> : SRv$
+
+    $\Rightarrow SRv(T_{vi})(\varepsilon(M_{it}))(Q_{vt})$ \\
+    
+    }
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Thank you}
+    Thank you
+\end{frame}
+
+\end{document}
+
+
